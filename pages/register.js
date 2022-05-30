@@ -83,7 +83,7 @@ const Register = () => {
           )}
         </button>
       </form>
-      <p className="mt-5">
+      <p className="mt-5 text-black">
         Already on My LinkedIn?
         <button
           className="cursor-pointer px-4 text-blue-400 hover:text-blue-500"

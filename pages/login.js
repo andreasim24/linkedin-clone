@@ -69,7 +69,7 @@ function Login() {
           )}
         </button>
       </form>
-      <p className="mt-5">New to My LinkedIn?</p>
+      <p className="mt-5 text-black">New to My LinkedIn?</p>
       <button
         className="cursor-pointer px-4 text-blue-400 hover:text-blue-500"
         onClick={() => router.push("/register")}
