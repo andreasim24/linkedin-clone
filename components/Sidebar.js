@@ -4,8 +4,12 @@ import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import profileBanner from "../assets/ProfileBanner.png";
 import { PremiumIcon, SaveIcon, CollapseDownIcon } from "./Icons";
 import React from "react";
+import { useSelector } from "react-redux";
+import { selectUser } from "../store/slices/userSlice";
 
 function Sidebar() {
+  const user = useSelector(selectUser);
+
   return (
     <div className="space-y-2 min-w-max max-w-lg md:w-[270px] ">
       {/* Top */}
@@ -14,12 +18,12 @@ function Sidebar() {
           <Image src={profileBanner} layout="fill" priority />
         </div>
         <Avatar
-          src="https://images.pexels.com/photos/937481/pexels-photo-937481.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+          src={user.photoURL}
           className="!h-16 !w-16 !border-2 !absolute !top-4 !cursor-pointer"
         />
         <div className="mt-5 py-4 space-x-0.5">
           <h4 className="hover:underline decoration-purple-700 underline-offset-1 cursor-pointer">
-            Andreas Immanuel
+            {user.displayName}
           </h4>
           <p className="text-black/60 dark:text-white/75 text-sm">
             Front end Developer

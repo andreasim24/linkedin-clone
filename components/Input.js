@@ -1,14 +1,15 @@
 import { Avatar } from "@mui/material";
 import { PhotoIcon, VideoIcon, EventIcon, ArticleIcon } from "./Icons";
+import { useSelector } from "react-redux";
+import { selectUser } from "../store/slices/userSlice";
 
 function Input({ handlePostSend, message, setMessage }) {
+  const user = useSelector(selectUser);
+
   return (
     <div className="bg-white dark:bg-[#1D2226] rounded-lg px-3 pt-3 space-y-2 border border-gray-300 dark:border-none">
       <div className="flex items-center space-x-2">
-        <Avatar
-          src="https://images.pexels.com/photos/937481/pexels-photo-937481.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-          className="!h-10 !w-10 cursor-pointer"
-        />
+        <Avatar src={user.photoURL} className="!h-10 !w-10 cursor-pointer" />
 
         <form className="w-full" onSubmit={handlePostSend}>
           <input

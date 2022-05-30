@@ -24,8 +24,6 @@ function Feed() {
     setMessage("");
   };
 
-  console.log(user);
-
   return (
     <div className="space-y-6 pb-24 max-w-lg">
       <Input

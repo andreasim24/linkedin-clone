@@ -5,10 +5,30 @@ import CircularProgress from "@mui/material/CircularProgress";
 import linkedin from "../assets/linkedin-logo.png";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { register } from "../services/userService";
 
 const Register = () => {
-  const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const [name, setName] = useState("");
+  const [photoURL, setPhotoURL] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleRegister = e => {
+    e.preventDefault();
+    setLoading(true);
+
+    register(email, password, name, photoURL)
+      .then(() => {
+        setLoading(false);
+        router.push("/");
+      })
+      .catch(error => {
+        setLoading(false);
+        alert(error);
+      });
+  };
 
   return (
     <div className="grid w-96 mx-auto place-items-center py-10">
@@ -18,11 +38,39 @@ const Register = () => {
         width={150}
         height={100}
       />
-      <form className="w-full flex flex-col bg-white rounded-lg px-8 py-10 shadow-md">
-        <TextField required label="Full Name" margin="normal" />
-        <TextField label="Photo of Profile (URL)" margin="normal" />
-        <TextField required label="Email" margin="normal" type="email" />
-        <TextField required label="Password" margin="normal" type="password" />
+      <form
+        onSubmit={handleRegister}
+        className="w-full flex flex-col bg-white rounded-lg px-8 py-10 shadow-md"
+      >
+        <TextField
+          required
+          label="Full Name"
+          margin="normal"
+          value={name}
+          onChange={e => setName(e.target.value)}
+        />
+        <TextField
+          label="Photo of Profile (URL)"
+          margin="normal"
+          value={photoURL}
+          onChange={e => setPhotoURL(e.target.value)}
+        />
+        <TextField
+          required
+          label="Email"
+          margin="normal"
+          type="email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+        />
+        <TextField
+          required
+          label="Password"
+          margin="normal"
+          type="password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+        />
         <button
           type="submit"
           className="bg-blue-400 hover:bg-blue-500 active:bg-blue-600 text-white flex items-center justify-center rounded-full cursor-pointer text-base h-12 w-full mt-8 ml-auto"

@@ -5,9 +5,12 @@ import { logout as logoutApp } from "../store/slices/userSlice";
 import { auth } from "../services/firebaseService";
 import { useDispatch } from "react-redux";
 import { useMoralis } from "react-moralis";
+import { useSelector } from "react-redux";
+import { selectUser } from "../store/slices/userSlice";
 
 function HeaderLink({ Icon, text, feed, active, avatar, hidden, theme, work }) {
   const dispatch = useDispatch();
+  const userProfile = useSelector(selectUser);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -45,10 +48,7 @@ function HeaderLink({ Icon, text, feed, active, avatar, hidden, theme, work }) {
   const loginMetamask = async () => {
     if (!isAuthenticated) {
       await authenticate({ signingMessage: "Log in using Moralis" })
-        .then(function (user) {
-          console.log("logged in user:", user);
-          console.log(user.get("ethAddress"));
-        })
+        .then(function (user) {})
         .catch(function (error) {
           console.log(error);
         });
@@ -75,7 +75,7 @@ function HeaderLink({ Icon, text, feed, active, avatar, hidden, theme, work }) {
             aria-expanded={open ? "true" : undefined}
           >
             <Avatar
-              src="https://images.pexels.com/photos/937481/pexels-photo-937481.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              src={userProfile.photoURL}
               className="!h-7 !w-7 lg:!-mb-0 "
             />
             <h4
